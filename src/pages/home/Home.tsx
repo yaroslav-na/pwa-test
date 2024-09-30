@@ -11,21 +11,35 @@ type Message = {
   author: string;
 };
 
-const socket = io("https://server-test-xi7c.onrender.com/");
+const socket = io("https://server-test-xi7c.onrender.com", {
+  autoConnect: false,
+});
 
 export const Home: FC = () => {
   const username = useAuth((state) => state.username);
   const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
-    function pleaseWorkHuynyaSucha(event: Message) {
+    function updateMessages(event: Message) {
+      console.log(event);
+
       setMessages((prevMessages) => [...prevMessages, event]);
     }
+    function loadMessages(event: Message[]) {
+      console.log(event, "LOADING");
 
-    socket.on("ping", pleaseWorkHuynyaSucha);
+      setMessages(event);
+    }
+
+    socket.connect();
+
+    socket.on("load-messages", loadMessages);
+    socket.on("send-message", updateMessages);
 
     return () => {
-      socket.off("ping", pleaseWorkHuynyaSucha);
+      socket.off("send-message", updateMessages);
+      socket.off("load-messages", loadMessages);
+      socket.disconnect();
     };
   }, []);
 
@@ -33,7 +47,7 @@ export const Home: FC = () => {
     event.preventDefault();
 
     const message = (event.currentTarget[0] as HTMLInputElement).value;
-    socket.emit("ping", { title: message, author: username });
+    socket.emit("send-message", { title: message, author: username });
 
     (event.currentTarget[0] as HTMLInputElement).value = "";
   };
