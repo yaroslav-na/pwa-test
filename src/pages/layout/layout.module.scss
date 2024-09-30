@@ -1,0 +1,31 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  &__header {
+    box-shadow: 0 0 4px 0 #0000001f;
+    padding-block: 16px;
+  }
+
+  &__main {
+    flex-grow: 1;
+  }
+
+  &__footer {
+    padding-block: 16px;
+    background: #323232;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  &__headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__headerInfo {
+    font-size: 24px;
+  }
+}
