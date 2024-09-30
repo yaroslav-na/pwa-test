@@ -30,7 +30,7 @@ export const Home: FC = () => {
   }, []);
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
-    event.stopPropagation();
+    event.preventDefault();
 
     const message = (event.currentTarget[0] as HTMLInputElement).value;
     socket.emit("ping", { title: message, author: username });
