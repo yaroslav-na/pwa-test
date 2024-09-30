@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 import classes from "./layout.module.scss";

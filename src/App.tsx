@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 import { Home, Layout, LogIn } from "./pages";
 import { AuthProvider } from "./auth";
